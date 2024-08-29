@@ -1,6 +1,9 @@
-const getAllCategory = (req, res) => {
+const sql = require("../config/db");
+
+const getAllCategory = async (req, res) => {
   // postgre select
-  res.status(200).json({});
+  const data = await sql`SELECT * FROM categories`;
+  res.status(200).json({ message: "success", user: data });
 };
 
 const createCategory = () => {};
