@@ -6,6 +6,7 @@ dotenv.config();
 
 const userRoutes = require("./routes/user-route");
 const categoryRoutes = require("./routes/category-route");
+const authRoutes = require("./routes/auth-route");
 
 const PORT = process.env.PORT;
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(logger());
 
 app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 app.use("/categories", categoryRoutes);
 
 app.listen(PORT, () => {
