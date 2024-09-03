@@ -1,8 +1,7 @@
 const express = require("express");
-const dotenv = require("dotenv");
+require("dotenv").config();
 const cors = require("cors");
 const { logger } = require("./middlewares/logger");
-dotenv.config();
 
 const userRoutes = require("./routes/user-route");
 const categoryRoutes = require("./routes/category-route");
