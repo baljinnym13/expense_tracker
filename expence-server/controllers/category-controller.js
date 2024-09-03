@@ -21,7 +21,7 @@ const createCategory = async (req, res) => {
   }
 };
 const updateCategory = async (req, res) => {
-  const category = req.baby;
+  const category = req.body;
   const { id } = req.params;
   const columns = object.keys(category);
   try {
