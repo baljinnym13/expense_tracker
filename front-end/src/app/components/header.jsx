@@ -1,4 +1,4 @@
-import { PlusIcon } from "@/icons";
+// import { PlusIcon } from "@/icons";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export const Header = ({ user, logOut }) => {
       </div>
       <div className="flex gap-6 items-center">
         <button className="btn bg-[#0166FF] text-white btn-sm">
-          <PlusIcon />
+          {/* <PlusIcon /> */}
           Records
         </button>
         <div className="avatar w-12 h-12">
