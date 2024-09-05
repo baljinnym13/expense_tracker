@@ -5,6 +5,16 @@ const getAllUser = async (req, res) => {
   console.log("DATA", data);
   res.status(200).json({ message: "success", user: data });
 };
+const currentUser = async (req, res) => {
+  const user = req.user;
+  console.log("user", user);
+  try {
+    const [data] = await sql`SELECT * FROM users WHERE id= ${user.id}`;
+    res.status(200).json({ message: "success", data });
+  } catch (error) {
+    res.status(401).json({ message: "error" });
+  }
+};
 const createUser = async (req, res) => {
   const user = req.body;
   const columns = object.key(user);
@@ -37,7 +47,13 @@ const deleteUser = async (req, res) => {
   res.status(200).json({ message: "delete success", user: data });
 };
 
-module.exports = { getAllUser, createUser, updateUser, deleteUser };
+module.exports = {
+  getAllUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  currentUser,
+};
 // const updateCategory = async (req, res) => {
 //   const category = req.baby;
 //   const { id } = req.params;

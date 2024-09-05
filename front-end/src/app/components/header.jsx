@@ -24,6 +24,7 @@ export const Header = ({ user, logOut }) => {
             <img src={user?.avatarImg} />
           </div>
         </div>
+        <div>{user.data.name}</div>
         <button className="btn btn-sm" onClick={logOut}>
           Log out
         </button>

@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger());
 
-app.use("/users", userRoutes);
+app.use("/users", userRoutes); // localhost:8008/users/profile;
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRoutes);
 

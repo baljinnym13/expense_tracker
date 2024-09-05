@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-export const auth = (req, res, next) => {
+const auth = (req, res, next) => {
   if (!req.headers.authorization) {
     res.status(401).json({ message: " newterne vv" });
   }
