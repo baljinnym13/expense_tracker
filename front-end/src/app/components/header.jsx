@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const Header = ({ user, logOut }) => {
+  console.log("user-harah", user);
   return (
     <header className="flex items-center max-w-[1200px] mx-auto justify-between py-4">
       <div className="flex gap-6 items-center">
-        <Image src="/logo-2.svg" width={28} height={28} alt="logo" />
+        <Image src="/images/logo.png" width={100} height={100} alt="logo" />
         <Link href="/dashboard">
           <p>Dashboard</p>
         </Link>
@@ -21,10 +22,10 @@ export const Header = ({ user, logOut }) => {
         </button>
         <div className="avatar w-12 h-12">
           <div className="w-24 rounded-full">
-            <img src={user?.avatarImg} />
+            <img src="https://unsplash.com/photos/man-in-black-formal-suit-wearing-eyeglasses-EQFtEzJGERg" />
           </div>
         </div>
-        <div>{user.data.name}</div>
+        <div>{user.name}</div>
         <button className="btn btn-sm" onClick={logOut}>
           Log out
         </button>
