@@ -22,7 +22,7 @@ export const Header = ({ user, logOut }) => {
         </button>
         <div className="avatar w-12 h-12">
           <div className="w-24 rounded-full">
-            <img src="https://unsplash.com/photos/man-in-black-formal-suit-wearing-eyeglasses-EQFtEzJGERg" />
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" />
           </div>
         </div>
         <div>{user.name}</div>
