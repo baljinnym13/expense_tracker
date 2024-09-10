@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const Header = ({ user, logOut }) => {
-  console.log("user-harah", user);
   return (
     <header className="flex items-center max-w-[1200px] mx-auto justify-between py-4">
       <div className="flex gap-6 items-center">

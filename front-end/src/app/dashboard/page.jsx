@@ -54,7 +54,7 @@ import { UserContext } from "../context/user-context";
 import axios from "axios";
 import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
-import HomeRecords from "../components/home-records";
+import Record from "../components/home-records";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -63,7 +63,7 @@ const Dashboard = () => {
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(`${apiUrl}/records/${user.id}`);
-      setTransactionData(res.data);
+      setTransactionData(res.data.userRecords);
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch transactions");
@@ -79,7 +79,7 @@ const Dashboard = () => {
   return (
     <div>
       <div>
-        {transactionData?.transactions?.map((transaction, index) => {
+        {/* {transactionData?.transactions?.map((transaction, index) => {
           return (
             <div key={index} className="flex">
               <img src="/income.svg" alt="income" />
@@ -89,7 +89,7 @@ const Dashboard = () => {
               </div>
             </div>
           );
-        })}
+        })} */}
         <div className="w-[1200px] mt-8 mx-[120px]">
           <div className="flex gap-6">
             <div className="w-[384px] h-[216px] rounded-xl bg-[#0166FF]">
@@ -158,11 +158,10 @@ const Dashboard = () => {
               <p className="font-semibold">Last Records</p>
               <p className="font-thin"> Jun 1 - Nov 30</p>
             </div>
-            <HomeRecords />
-            <HomeRecords />
-            <HomeRecords />
-            <HomeRecords />
-            <HomeRecords />
+
+            {transactionData.map((tr) => (
+              <Record transaction={tr} />
+            ))}
           </div>
         </div>
       </div>

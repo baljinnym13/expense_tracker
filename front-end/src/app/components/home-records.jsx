@@ -1,6 +1,7 @@
 import React from "react";
 
-const HomeRecords = () => {
+const Record = ({ transaction }) => {
+  console.log(transaction);
   return (
     <div className="flex justify-between gap-2 items-center py-4 px-6 border-b border-gray-200">
       <div className="flex flex-row gap-4 items-center">
@@ -8,13 +9,21 @@ const HomeRecords = () => {
           <img src="home.svg" alt="home" />
         </span>
         <div>
-          <p className="py-2">Lending & Renting</p>
+          <p className="py-2">{transaction.name}</p>
           <p className="font-thin text-sm">3 hours ago</p>
         </div>
       </div>
-      <p className="text-[#84CC16]">-1,000₮</p>
+      <p
+        className={`${
+          transaction.transaction_type === "exp"
+            ? "text-red-400"
+            : "text-[#84CC16]"
+        }`}
+      >
+        {transaction.amount}₮
+      </p>
     </div>
   );
 };
 
-export default HomeRecords;
+export default Record;
