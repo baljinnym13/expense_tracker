@@ -6,15 +6,11 @@ const {
   createCategory,
   deleteCategory,
 } = require("../controllers/category-controller");
+const { auth } = require("../middlewares/auth");
 
 const router = Router();
 
-router
-  .route("/")
-  .get((req, res, next) => {
-    next();
-  }, getAllCategory)
-  .post(createCategory);
+router.route("/").get(getAllCategory).post(createCategory);
 router.route("/:id").put(updateCategory).delete(deleteCategory);
 
 module.exports = router;

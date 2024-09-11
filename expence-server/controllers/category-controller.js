@@ -4,7 +4,8 @@ const getAllCategory = async (req, res) => {
   // postgre select
   try {
     const data = await sql`SELECT * FROM categories`;
-    res.status(200).json({ message: "success", user: data });
+    res.status(200).json({ message: "success", data });
+    console.log("backend", data);
   } catch (error) {
     res.status(400).json({ error });
   }
