@@ -12,7 +12,7 @@ export const Header = ({ user, logOut }) => {
   return (
     <header className="flex items-center max-w-[1200px] mx-auto justify-between py-4">
       <div className="flex gap-6 items-center">
-        <Image src="/images/logo.png" width={100} height={100} alt="logo" />
+        <Image src="/logo.png" width={100} height={100} alt="logo" />
         <Link href="/dashboard">
           <p>Dashboard</p>
         </Link>

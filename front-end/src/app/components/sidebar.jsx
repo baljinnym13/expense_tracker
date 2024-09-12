@@ -102,16 +102,13 @@ export const RecordCategories = () => {
         <h4 className="text-xs text-gray-400">Clear</h4>
       </div>
       <div>
-        {/* <div className="flex items-center gap-2 mb-2">
-          <EyeIcon />
-          <p>Food & Drinks</p>
-        </div>
-        <div className="flex items-center gap-2 mb-2">
-          <EyeIcon />
-          <p>Shopping</p>
-        </div> */}
         {catsData.map((catData) => {
-          return <p>{catData.name}</p>;
+          return (
+            <div className="flex items-center gap-2 mb-2">
+              <EyeIcon />
+              <p>{catData.name}</p>
+            </div>
+          );
         })}
       </div>
       <button
