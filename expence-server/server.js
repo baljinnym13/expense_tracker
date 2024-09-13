@@ -15,6 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use(logger());
 
+app.get("/", (_, res) => {
+  res.send("wellcome expense tracker api");
+});
+
 app.use("/records", recordsRoutes);
 app.use("/users", userRoutes); // localhost:8008/users/profile;
 app.use("/auth", authRoutes);

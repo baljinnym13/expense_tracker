@@ -1,4 +1,10 @@
+import { useState } from "react";
+
 export const CategoryModal = ({ categoryOpen, close }) => {
+  const [catData, setCatData] = useState({
+    name: "",
+    category_image: "",
+  });
   return (
     <dialog open={categoryOpen} className="modal">
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
