@@ -1,7 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { DashboardContext } from "../context/dashboard-context";
 
 export const RecordModal = ({ isOpen, close }) => {
+  const catsData = useContext(DashboardContext);
+
   return (
     <dialog open={isOpen} className="modal">
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -15,7 +18,7 @@ export const RecordModal = ({ isOpen, close }) => {
           <h3 className="text-lg font-bold">Add Record</h3>
           <div className="divider"></div>
           <div className="flex gap-12">
-            <RightSide />
+            <RightSide catsData={catsData} />
             <LeftSide />
           </div>
         </div>
@@ -24,7 +27,7 @@ export const RecordModal = ({ isOpen, close }) => {
   );
 };
 
-export const RightSide = () => {
+export const RightSide = ({ catsData }) => {
   const [activeTab, setActiveTab] = useState("INC");
 
   return (
@@ -59,14 +62,18 @@ export const RightSide = () => {
         />
         <div className="flex flex-col">
           <label>Category</label>
-          <select className="select select-bordered">
+          <select
+            className="select select-bordered"
+            onChange={(e) => {
+              e.target.value;
+            }}
+          >
             <option disabled selected>
               Choose
             </option>
-            <option value="food">Food</option>
-            <option value="drink">Drink</option>
-            <option value="rent">Rent</option>
-            <option value="other">Other</option>
+            {catsData?.map((cat) => (
+              <option value={cat.id}>{cat.name}</option>
+            ))}
           </select>
         </div>
         <div className="flex gap-3">

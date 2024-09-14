@@ -2,10 +2,11 @@
 
 import { PlusIcon, EyeIcon } from "@/icons";
 import { RecordModal } from "./record-modal";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CategoryModal } from "./category-modal";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
+import { DashboardContext } from "../context/dashboard-context";
 
 export const SideBar = () => {
   return (
@@ -39,7 +40,7 @@ export const AddRecord = () => {
         placeholder="search"
         className="input input-bordered w-full max-w-xs input-sm"
       />
-      <RecordModal isOpen={isOpen} close={handleClose} />
+      {/* <RecordModal isOpen={isOpen} close={handleClose} /> */}
     </>
   );
 };
@@ -77,23 +78,24 @@ export const RecordTypes = () => {
 
 export const RecordCategories = () => {
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [catsData, setCatsData] = useState([]);
+  // const [catsData, setCatsData] = useState([]);
   const handleClose = () => {
     setCategoryOpen(false);
   };
-  const categoriesData = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/categories`);
-      const { data } = res.data;
-      console.log("categor", data);
-      setCatsData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    categoriesData();
-  }, []);
+  const catsData = useContext(DashboardContext);
+  // const categoriesData = async () => {
+  //   try {
+  //     const res = await axios.get(`${apiUrl}/categories`);
+  //     const { data } = res.data;
+  //     console.log("categor", data);
+  //     setCatsData(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   categoriesData();
+  // }, []);
 
   return (
     <div>
