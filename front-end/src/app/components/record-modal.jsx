@@ -1,10 +1,11 @@
 "use client";
 import { useContext, useState } from "react";
 import { DashboardContext } from "../context/dashboard-context";
+import { AddRecord } from ".";
+import { addRequestMeta } from "next/dist/server/request-meta";
+import { UserContext } from "../context/user-context";
 
 export const RecordModal = ({ isOpen, close }) => {
-  const catsData = useContext(DashboardContext);
-
   return (
     <dialog open={isOpen} className="modal">
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -18,7 +19,7 @@ export const RecordModal = ({ isOpen, close }) => {
           <h3 className="text-lg font-bold">Add Record</h3>
           <div className="divider"></div>
           <div className="flex gap-12">
-            <RightSide catsData={catsData} />
+            <RightSide />
             <LeftSide />
           </div>
         </div>
@@ -27,8 +28,24 @@ export const RecordModal = ({ isOpen, close }) => {
   );
 };
 
-export const RightSide = ({ catsData }) => {
+export const RightSide = () => {
   const [activeTab, setActiveTab] = useState("INC");
+  const catsData = useContext(DashboardContext);
+  const { user } = useContext(UserContext);
+
+  const [recordData, setRecordData] = useState({
+    uid: "",
+    cid: "",
+    name: "",
+    amount: "",
+    transaction_type: "",
+    description: "",
+  });
+  const recordAdd = () => {
+    setRecordData({ ...recordAdd, uid: user.id });
+    console.log("uid", user.id);
+    return console.log("click", recordData);
+  };
 
   return (
     <div className="w-2/5">
@@ -59,13 +76,25 @@ export const RightSide = ({ catsData }) => {
           type="text"
           placeholder="Amount"
           className="input input-bordered"
+          onChange={(e) => {
+            setRecordData({ ...recordData, amount: e.target.value });
+          }}
+        />
+        <input
+          type="text"
+          placeholder="name"
+          className="input input-bordered"
+          onChange={(e) => {
+            setRecordData({ ...recordData, name: e.target.value });
+          }}
         />
         <div className="flex flex-col">
           <label>Category</label>
           <select
             className="select select-bordered"
             onChange={(e) => {
-              e.target.value;
+              console.log("E.VALEU", e.target.value);
+              setRecordData({ ...recordData, cid: e.target.value });
             }}
           >
             <option disabled selected>
@@ -89,6 +118,7 @@ export const RightSide = ({ catsData }) => {
       </div>
       <div className="mt-3">
         <button
+          onClick={recordAdd}
           className={`btn ${
             activeTab === "EXP" ? "bg-blue-500" : "bg-green-500"
           } text-white w-full`}
