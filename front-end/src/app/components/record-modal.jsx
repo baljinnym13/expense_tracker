@@ -6,6 +6,27 @@ import { addRequestMeta } from "next/dist/server/request-meta";
 import { UserContext } from "../context/user-context";
 
 export const RecordModal = ({ isOpen, close }) => {
+  const catsData = useContext(DashboardContext);
+  const { user } = useContext(UserContext);
+  const [activeTab, setActiveTab] = useState("INC");
+  const [recordData, setRecordData] = useState({
+    uid: "",
+    cid: "",
+    name: "",
+    amount: "",
+    transaction_type: "",
+    description: "",
+  });
+  const recordAdd = async () => {
+    return;
+    setRecordData({ ...recordData, uid: user.id });
+    setRecordData({ ...recordData, transaction_type: activeTab });
+    // try{const }
+    console.log("uid", user.id);
+    console.log("uid", transaction_type);
+    console.log("click", recordData);
+  };
+
   return (
     <dialog open={isOpen} className="modal">
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -19,8 +40,15 @@ export const RecordModal = ({ isOpen, close }) => {
           <h3 className="text-lg font-bold">Add Record</h3>
           <div className="divider"></div>
           <div className="flex gap-12">
-            <RightSide />
-            <LeftSide />
+            <RightSide
+              catsData={catsData}
+              recordAdd={recordAdd}
+              setRecordData={setRecordData}
+              recordData={recordData}
+              setActiveTab={setActiveTab}
+              activeTab={activeTab}
+            />
+            <LeftSide setRecordData={setRecordData} recordData={recordData} />
           </div>
         </div>
       </div>
@@ -28,24 +56,15 @@ export const RecordModal = ({ isOpen, close }) => {
   );
 };
 
-export const RightSide = () => {
-  const [activeTab, setActiveTab] = useState("INC");
-  const catsData = useContext(DashboardContext);
-  const { user } = useContext(UserContext);
-
-  const [recordData, setRecordData] = useState({
-    uid: "",
-    cid: "",
-    name: "",
-    amount: "",
-    transaction_type: "",
-    description: "",
-  });
-  const recordAdd = () => {
-    setRecordData({ ...recordAdd, uid: user.id });
-    console.log("uid", user.id);
-    return console.log("click", recordData);
-  };
+export const RightSide = ({
+  catsData,
+  recordAdd,
+  recordData,
+  setRecordData,
+  setActiveTab,
+  activeTab,
+}) => {
+  // const [activeTab, setActiveTab] = useState("INC");
 
   return (
     <div className="w-2/5">
@@ -130,7 +149,7 @@ export const RightSide = () => {
   );
 };
 
-export const LeftSide = () => {
+export const LeftSide = ({ setRecordData, recordData }) => {
   return (
     <div className="flex flex-col w-3/5 gap-3">
       <label>Note</label>
@@ -139,6 +158,9 @@ export const LeftSide = () => {
         id="note"
         className="h-[280px] textarea textarea-bordered"
         placeholder="Write here"
+        onChange={(e) => {
+          setRecordData({ ...recordData, description: e.target.value });
+        }}
       ></textarea>
     </div>
   );

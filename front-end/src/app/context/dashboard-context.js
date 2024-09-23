@@ -9,6 +9,7 @@ export const DashboardContext = createContext();
 export const DashboardProvider = ({ children }) => {
   //   const [chartData, setChartData] = useState(null);
   const [catsData, setCatsData] = useState([]);
+
   //   const getChartData = async () => {
   //     try {
   //       const res = await axios.get(`${apiUrl}/records/chart`);
